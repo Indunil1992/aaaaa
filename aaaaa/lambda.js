@@ -1,27 +1,28 @@
 let AWS = require('aws-sdk');
-const sns = new AWS.SNS();
+const ses = new AWS.SES();
 
 exports.handler = function (event, context, callback) {
-    sns.publish({
-        Message: 'msge frm indunil',
-        MessageAttributes: {
-            'AWS.SNS.SMS.SMSType': {
-                'DataType': 'String',
-                'StringValue': 'Transactional'
+    ses.sendEmail({
+        Destination: {
+            ToAddresses: ['indunil@adroitlogic.com'],
+            CcAddresses: [],
+            BccAddresses: []
+        },
+        Message: {
+            Body: {
+                Text: {
+                    Data: `123`
+                }
             },
-            'AWS.SNS.SMS.SenderID': {
-                'DataType': 'String',
-                'StringValue': '123'
+            Subject: {
+                Data: 'testsub'
             }
         },
-        PhoneNumber: '+713245242'
-    }).promise()
-        .then(data => {
-            // your code goes here
-        })
-        .catch(err => {
-            // error handling goes here
-        });
+        Source: 'indunil@adroitlogic.com',
+    }, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data);           // successful response
+    });
 
     callback(null, { "message": "Successfully executed" });
 }
