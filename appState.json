@@ -22,12 +22,12 @@
         "children": [],
         "isRemovable": true,
         "filePath": "aaaaa/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ses = new AWS.SES();\n\nexports.handler = function (event, context, callback) {\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ses = new AWS.SES();\n\nexports.handler = function (event, context, callback) {\n\n\n    callback(null, { \"message\": \"Successfully executed change time and mem\" });\n}",
         "config": {
           "runtime": "nodejs12.x",
           "handler": "handler",
-          "timeout": 60,
-          "memory": 128,
+          "timeout": 103,
+          "memory": 512,
           "layers": []
         },
         "triggers": [
@@ -102,7 +102,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576483197202
+    "lastSave": 1576483339762
   },
   "VCS_STATE": {
     "provider": "GitHub",
