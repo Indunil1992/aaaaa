@@ -22,15 +22,24 @@
         "children": [],
         "isRemovable": true,
         "filePath": "aaaaa/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ses = new AWS.SES();\n\nexports.handler = function (event, context, callback) {\n    ses.sendEmail({\n        Destination: {\n            ToAddresses: ['indunil@adroitlogic.com'],\n            CcAddresses: [],\n            BccAddresses: []\n        },\n        Message: {\n            Body: {\n                Text: {\n                    Data: `123`\n                }\n            },\n            Subject: {\n                Data: 'testsub'\n            }\n        },\n        Source: 'indunil@adroitlogic.com',\n    }, function (err, data) {\n        if (err) console.log(err, err.stack); // an error occurred\n        else console.log(data);           // successful response\n    });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ses = new AWS.SES();\n\nexports.handler = function (event, context, callback) {\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "config": {
-          "runtime": "nodejs8.10",
+          "runtime": "nodejs12.x",
           "handler": "handler",
           "timeout": 60,
           "memory": 128,
           "layers": []
         },
-        "triggers": [],
+        "triggers": [
+          {
+            "resourceName": "s3as2TestLahiru",
+            "config": {
+              "type": "s3:ObjectCreated:*",
+              "keyPrefix": "",
+              "keySuffix": ""
+            }
+          }
+        ],
         "testCases": {
           "1182c4a6-129f-4cb7-9549-b170bcf4209f": {
             "id": "1182c4a6-129f-4cb7-9549-b170bcf4209f",
@@ -42,35 +51,27 @@
         }
       }
     },
-    "deletedFiles": [],
     "rootNode": "94412f2c-25e0-4c82-86e6-c297a9137670",
     "openFiles": [
       "97c6f335-10cc-438c-b375-44cf2e0e69fc"
     ],
     "currentFileId": "97c6f335-10cc-438c-b375-44cf2e0e69fc",
     "resources": {
-      "ses-indunil@adroitlogic.com": {
-        "name": "ses-indunil@adroitlogic.com",
-        "type": "SES",
+      "s3as2TestLahiru": {
+        "name": "s3as2TestLahiru",
+        "type": "S3",
         "config": {
-          "selectedIdentity": "indunil@adroitlogic.com",
-          "projectRegion": "us-east-1",
-          "params": {
-            "to": "indunil@adroitlogic.com",
-            "cc": "",
-            "bcc": "",
-            "subject": "testsub",
-            "body": {
-              "text": "123",
-              "html": ""
-            }
+          "mode": 1,
+          "bucket": {
+            "region": "us-east-1",
+            "name": "as2-test-lahiru"
           }
         }
       }
     },
     "customTemplate": {
       "dialect": null,
-      "definitions": {}
+      "definitions": null
     },
     "envVariables": [
       {
@@ -101,7 +102,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1566538823776
+    "lastSave": 1576483197202
   },
   "VCS_STATE": {
     "provider": "GitHub",
